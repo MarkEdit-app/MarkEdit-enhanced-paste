@@ -1,7 +1,7 @@
 {
-  "name": "markedit-image-paste",
+  "name": "markedit-enhanced-paste",
   "version": "1.0.0",
-  "description": "Paste images easily in MarkEdit.",
+  "description": "Enhance MarkEdit with additional paste functionality.",
   "scripts": {
     "build": "vite build",
     "reload": "osascript -e 'quit app \"MarkEdit\"' -e 'delay 1' -e 'launch app \"MarkEdit\"'",
