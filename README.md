@@ -1,6 +1,6 @@
 # MarkEdit-enhanced-paste
 
-Enhance [MarkEdit](https://github.com/MarkEdit-app/MarkEdit) with additional paste features, such as handling copied images.
+Enhance [MarkEdit](https://github.com/MarkEdit-app/MarkEdit) with additional paste features, such as handling copied images and rich text (HTML).
 
 ## Installation
 
@@ -15,9 +15,21 @@ In [settings.json](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#a
 ```json
 {
   "extension.markeditEnhancedPaste": {
-    "enableImagePaste": true
+    "enableImagePaste": true,
+    "richPasteBehavior": "auto",
+    "turndownOptions": {
+      "headingStyle": "atx",
+      "bulletListMarker": "-",
+      "codeBlockStyle": "fenced",
+      "emDelimiter": "*",
+      "strongDelimiter": "**"
+    },
+    "pasteAsPlainTextHotKey": "Shift-Alt-Mod-v"
   }
 }
 ```
 
 - `enableImagePaste`: Whether to handle image paste.
+- `richPasteBehavior`: The behavior when handling rich text. Valid values are `auto`, `ask`, and `none`.
+- `turndownOptions`: Options used by [turndown](https://github.com/mixmark-io/turndown?tab=readme-ov-file#options), the service that converts HTML into Markdown.
+- `pasteAsPlainTextHotKey`: The hotkey to always paste plain text. See specs [here](https://codemirror.net/docs/ref/#view.KeyBinding).

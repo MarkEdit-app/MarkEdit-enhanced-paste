@@ -14,6 +14,11 @@ export async function handleImagePaste(event: ClipboardEvent) {
       continue;
     }
 
+    if (!event.defaultPrevented) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     const imageData = (await blobToBase64(file)).replace(/^data:.+;base64,/, '');
     const existingNames = (await MarkEdit.listFiles(basePath)) ?? [];
     const newFileName = generateFileName(file.name, existingNames);
