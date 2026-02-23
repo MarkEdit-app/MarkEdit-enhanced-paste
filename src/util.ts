@@ -1,3 +1,4 @@
+import { snippet } from '@codemirror/autocomplete';
 import { MarkEdit } from 'markedit-api';
 
 export function blobToBase64(blob: Blob): Promise<string> {
@@ -25,6 +26,12 @@ export function generateFileName(prefered: string, existing: string[]) {
       return candidate;
     }
   }
+}
+
+export function insertSnippet(template: string, label = '') {
+  const editor = MarkEdit.editorView;
+  const { from, to } = editor.state.selection.main;
+  snippet(template + '#{}')(editor, { label }, from, to);
 }
 
 export function insertText(text: string) {

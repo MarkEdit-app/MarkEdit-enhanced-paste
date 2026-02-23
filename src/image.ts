@@ -1,5 +1,5 @@
 import { MarkEdit } from 'markedit-api';
-import { blobToBase64, generateFileName, insertText } from './util';
+import { blobToBase64, generateFileName, insertSnippet, insertText } from './util';
 
 export async function handleImagePaste(event: ClipboardEvent) {
   const images = Array.from(event.clipboardData?.items ?? [])
@@ -31,7 +31,7 @@ async function pasteImage(file: File) {
     data: imageData,
   });
 
-  insertText(`![Image](${newFileName})`);
+  insertSnippet(`![#{Image}](${newFileName})`);
 }
 
 function handleFileNames(event: ClipboardEvent) {
