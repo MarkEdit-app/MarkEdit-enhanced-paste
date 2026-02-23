@@ -1,6 +1,7 @@
 import TurndownService from 'turndown';
 import { MarkEdit } from 'markedit-api';
 import { turndownOptions } from './settings';
+import { insertText } from './util';
 
 const turndown = new TurndownService({
   ...{
@@ -50,9 +51,4 @@ function pasteAsRichText(html: string) {
   if (markdown.length > 0) {
     insertText(markdown);
   }
-}
-
-function insertText(text: string) {
-  const selection = MarkEdit.editorAPI.getSelections()[0];
-  MarkEdit.editorAPI.setText(text, selection);
 }

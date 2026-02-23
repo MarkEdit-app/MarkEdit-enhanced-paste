@@ -1,3 +1,5 @@
+import { MarkEdit } from 'markedit-api';
+
 export function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -23,4 +25,9 @@ export function generateFileName(prefered: string, existing: string[]) {
       return candidate;
     }
   }
+}
+
+export function insertText(text: string) {
+  const selection = MarkEdit.editorAPI.getSelections()[0];
+  MarkEdit.editorAPI.setText(text, selection);
 }

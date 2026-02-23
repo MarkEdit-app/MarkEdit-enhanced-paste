@@ -1,34 +1,49 @@
 import { MarkEdit } from 'markedit-api';
-import { blobToBase64, generateFileName } from './util';
+import { blobToBase64, generateFileName, insertText } from './util';
 
 export async function handleImagePaste(event: ClipboardEvent) {
+  const images = Array.from(event.clipboardData?.items ?? [])
+    .map(item => item.getAsFile())
+    .filter(file => file?.type.startsWith('image/')) as File[];
+
+  // Fall back to file names if no images
+  if (images.length === 0) {
+    return handleFileNames(event);
+  }
+
+  await Promise.all(images.map(pasteImage));
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+async function pasteImage(file: File) {
   const basePath = (await MarkEdit.getFileInfo())?.parentPath;
   if (basePath === undefined) {
     return;
   }
 
-  const items = event.clipboardData?.items ?? [];
-  for (let index = 0; index < items.length; ++index) {
-    const file = items[index].getAsFile();
-    if (!file?.type.startsWith('image/')) {
-      continue;
-    }
+  const imageData = (await blobToBase64(file)).replace(/^data:.+;base64,/, '');
+  const existingNames = (await MarkEdit.listFiles(basePath)) ?? [];
+  const newFileName = generateFileName(file.name, existingNames);
 
-    if (!event.defaultPrevented) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  MarkEdit.createFile({
+    path: `${basePath}/${newFileName}`,
+    data: imageData,
+  });
 
-    const imageData = (await blobToBase64(file)).replace(/^data:.+;base64,/, '');
-    const existingNames = (await MarkEdit.listFiles(basePath)) ?? [];
-    const newFileName = generateFileName(file.name, existingNames);
+  insertText(`![Image](${newFileName})`);
+}
 
-    MarkEdit.createFile({
-      path: `${basePath}/${newFileName}`,
-      data: imageData,
-    });
-
-    const targetPos = MarkEdit.editorAPI.getSelections()[0];
-    MarkEdit.editorAPI.setText(`![Image](${newFileName})`, targetPos);
+function handleFileNames(event: ClipboardEvent) {
+  const clipboardData = event.clipboardData;
+  const plainText = clipboardData?.getData('text/plain') ?? '';
+  if (plainText.length > 0) {
+    return;
   }
+
+  const files = Array.from(clipboardData?.files ?? []);
+  insertText(files.map(file => file.name).join('\n'));
+
+  event.preventDefault();
+  event.stopPropagation();
 }
