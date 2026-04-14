@@ -31,7 +31,7 @@ async function pasteImage(file: File) {
     data: imageData,
   });
 
-  insertSnippet(`![#{Image}](${newFileName})`);
+  insertSnippet(`![#{Image}](<${newFileName}>)`);
 }
 
 function handleFileNames(event: ClipboardEvent) {
