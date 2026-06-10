@@ -397,9 +397,9 @@ fsevents@~2.3.2, fsevents@~2.3.3:
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
-"markedit-api@https://github.com/MarkEdit-app/MarkEdit-api#v0.21.0":
-  version "0.21.0"
-  resolved "https://github.com/MarkEdit-app/MarkEdit-api#080e8fbad8cd6de91b958c74e793c0dc34ef6fb2"
+"markedit-api@https://github.com/MarkEdit-app/MarkEdit-api#v0.27.0":
+  version "0.27.0"
+  resolved "https://github.com/MarkEdit-app/MarkEdit-api#ac94ce562f4b7aa986369d3e3e04d8b168b42ffb"
 
 "markedit-vite@https://github.com/MarkEdit-app/MarkEdit-vite#v0.5.0":
   version "0.4.0"
