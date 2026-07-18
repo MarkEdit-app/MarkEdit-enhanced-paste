@@ -31,7 +31,8 @@ async function pasteImage(file: File) {
     data: imageData,
   });
 
-  insertSnippet(`![#{Image}](<${newFileName}>)`);
+  const target = newFileName.includes(' ') ? `<${newFileName}>` : newFileName;
+  insertSnippet(`![#{Image}](${target})`);
 }
 
 function handleFileNames(event: ClipboardEvent) {

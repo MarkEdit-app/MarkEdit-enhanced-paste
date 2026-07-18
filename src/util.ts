@@ -35,6 +35,11 @@ export function insertSnippet(template: string, label = '') {
 }
 
 export function insertText(text: string) {
-  const selection = MarkEdit.editorAPI.getSelections()[0];
-  MarkEdit.editorAPI.setText(text, selection);
+  const editorAPI = MarkEdit.editorAPI;
+  const selection = editorAPI.getSelections()[0];
+  editorAPI.setText(text, selection);
+
+  // Collapse the selection to the end of the inserted text
+  const caret = selection.from + text.length;
+  editorAPI.setSelections([{ from: caret, to: caret }]);
 }
