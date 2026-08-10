@@ -1,6 +1,12 @@
 import { snippet } from '@codemirror/autocomplete';
 import { MarkEdit } from 'markedit-api';
 
+export function extractImages(event: ClipboardEvent) {
+  return Array.from(event.clipboardData?.items ?? [])
+    .map(item => item.getAsFile())
+    .filter((file): file is File => file?.type.startsWith('image/') ?? false);
+}
+
 export function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

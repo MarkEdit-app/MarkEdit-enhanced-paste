@@ -1,10 +1,8 @@
 import { MarkEdit } from 'markedit-api';
-import { blobToBase64, generateFileName, insertSnippet, insertText } from './util';
+import { blobToBase64, generateFileName, extractImages, insertSnippet, insertText } from './util';
 
 export async function handleImagePaste(event: ClipboardEvent) {
-  const images = Array.from(event.clipboardData?.items ?? [])
-    .map(item => item.getAsFile())
-    .filter(file => file?.type.startsWith('image/')) as File[];
+  const images = extractImages(event);
 
   // Fall back to file names if no images
   if (images.length === 0) {

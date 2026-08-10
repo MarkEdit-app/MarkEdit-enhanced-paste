@@ -1,11 +1,22 @@
 import { EditorView, keymap } from '@codemirror/view';
 import { MarkEdit } from 'markedit-api';
-import { enableImagePaste, richPasteBehavior, pasteAsPlainTextHotKey } from './src/settings';
 import { handleRichPaste, pasteAsPlainText } from './src/rich';
 import { handleImagePaste } from './src/image';
+import { handleLinkPaste, linkTitleHandler } from './src/link';
+
+import {
+  enableImagePaste,
+  enableLinkTitleFetch,
+  richPasteBehavior,
+  pasteAsPlainTextHotKey,
+} from './src/settings';
 
 const pasteHandler = EditorView.domEventHandlers({
   paste: event => {
+    if (enableLinkTitleFetch && handleLinkPaste(event)) {
+      return;
+    }
+
     if (enableImagePaste) {
       handleImagePaste(event);
     }
@@ -17,6 +28,7 @@ const pasteHandler = EditorView.domEventHandlers({
 });
 
 MarkEdit.addExtension([
+  linkTitleHandler,
   pasteHandler,
   keymap.of([
     {
