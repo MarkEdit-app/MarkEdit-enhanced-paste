@@ -4,7 +4,7 @@ Enhance [MarkEdit](https://github.com/MarkEdit-app/MarkEdit) with additional pas
 
 ## Installation
 
-Copy [dist/markedit-enhanced-paste.js](dist/markedit-enhanced-paste.js?raw=true) to `~/Library/Containers/app.cyan.markedit/Data/Documents/scripts/`.
+Install this extension from the [MarkEdit Extension Registry](https://markedit-app.github.io/extensions/#markedit-enhanced-paste).
 
 You can also run `yarn install && yarn build` to build and deploy the script.
 
