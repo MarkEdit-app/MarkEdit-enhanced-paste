@@ -1,6 +1,6 @@
 {
   "name": "markedit-enhanced-paste",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Enhance MarkEdit with additional paste functionality.",
   "scripts": {
     "build": "vite build",

@@ -17,6 +17,7 @@ In [settings.json](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#a
   "extension.markeditEnhancedPaste": {
     "enableImagePaste": true,
     "enableLinkTitleFetch": false,
+    "enableMarkdownEscaping": false,
     "richPasteBehavior": "auto",
     "turndownOptions": {
       "headingStyle": "atx",
@@ -32,6 +33,7 @@ In [settings.json](https://github.com/MarkEdit-app/MarkEdit/wiki/Customization#a
 
 - `enableImagePaste`: Whether to handle image paste.
 - `enableLinkTitleFetch`: Whether to fetch the title of a pasted URL and create a Markdown link.
+- `enableMarkdownEscaping`: Whether to escape Markdown syntax found in rich text.
 - `richPasteBehavior`: The behavior when handling rich text. Valid values are `auto`, `ask`, and `none`.
 - `turndownOptions`: Options used by [turndown](https://github.com/mixmark-io/turndown?tab=readme-ov-file#options), the service that converts HTML into Markdown.
 - `pasteAsPlainTextHotKey`: The hotkey to always paste plain text. See specs [here](https://codemirror.net/docs/ref/#view.KeyBinding).

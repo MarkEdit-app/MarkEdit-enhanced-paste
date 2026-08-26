@@ -1,6 +1,6 @@
 import TurndownService from 'turndown';
 import { MarkEdit } from 'markedit-api';
-import { turndownOptions } from './settings';
+import { enableMarkdownEscaping, turndownOptions } from './settings';
 import { insertText } from './util';
 
 const turndown = new TurndownService({
@@ -13,6 +13,11 @@ const turndown = new TurndownService({
   },
   ...turndownOptions,
 });
+
+// Preserve Markdown syntax already present in clipboard text.
+if (!enableMarkdownEscaping) {
+  turndown.escape = text => text;
+}
 
 // Override turndown's built-in listItem rule, which hardcodes 3 spaces after
 // the bullet marker, to use a single space instead.
